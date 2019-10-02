@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".LocationMapActivity">
+    tools:context=".activities.LocationMapActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -38,6 +38,6 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".LocationMapActivity" />
+        tools:context=".activities.LocationMapActivity" />
 
 </LinearLayout>

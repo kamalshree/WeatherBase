@@ -1,4 +1,4 @@
-package tech.whatsupcoders.weatherbase;
+package tech.whatsupcoders.weatherbase.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +22,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 import java.util.Locale;
+
+import tech.whatsupcoders.weatherbase.R;
 
 public class LocationMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -60,12 +62,14 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        // Add a marker in Chicago and move the camera
+        LatLng myLocation = new LatLng(41.8781, -87.6298);
+        mMap.addMarker(new MarkerOptions().position(myLocation).title("Marker in Chicago"));
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 4.0f ) );
+
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
