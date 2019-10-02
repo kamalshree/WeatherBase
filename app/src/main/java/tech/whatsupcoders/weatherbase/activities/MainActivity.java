@@ -1,11 +1,13 @@
 package tech.whatsupcoders.weatherbase.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<Location> list;
     private ItemLocationCardAdapter cardAdapter;
+    String myFavLoc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
                 Location location=new Location();
-                String myFavLoc=data.getStringExtra("addressVal");
-                Toast.makeText(this, "Address"+myFavLoc, Toast.LENGTH_SHORT).show();
+                myFavLoc=data.getStringExtra("addressVal");
                 location.setPlace(myFavLoc);
                 list.add(location);
                 cardAdapter.notifyDataSetChanged();

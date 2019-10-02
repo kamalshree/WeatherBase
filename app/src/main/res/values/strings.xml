@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">WeatherBase</string>
     <string name="title_activity_location_map">Map</string>
+
+    <string-array name="places">
+    <item>Chicago,IL,USA</item>
+    <item>Orlando, FL,USA</item>
+    <item>Amsterdam, NL</item>
+    </string-array>
 </resources>

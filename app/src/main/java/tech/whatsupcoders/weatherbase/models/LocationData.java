@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class LocationData {
 
-    public static String[] data = new String[]{
+    public static String[]
+            data = new String[]{
             "Chicago, IL,USA",
             "Orlando, FL,USA",
-            "NewYork, NY,USA",
+            "Amsterdam, NL",
     };
 
     public static ArrayList<Location> getListData() {
@@ -17,9 +18,12 @@ public class LocationData {
         for (String mData : data) {
             location = new Location();
             location.setPlace(mData);
+            location.setLatitude(mData);
+            location.setLongitude(mData);
             list.add(location);
         }
 
         return list;
     }
+
 }

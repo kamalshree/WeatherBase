@@ -34,6 +34,8 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     private GoogleMap mMap;
     ImageButton addButton;
     String addressVal;
+    String latitude;
+    String longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,8 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.putExtra("addressVal", addressVal);
+                intent.putExtra("latitude", latitude);
+                intent.putExtra("longitude", longitude);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -83,9 +87,8 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                 mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(latLng));
                 addressVal=getAddress(latLng.latitude,latLng.longitude);
-                Toast.makeText(getApplicationContext(),
-                        latLng.latitude + ", " + latLng.longitude + "," +addressVal,
-                        Toast.LENGTH_SHORT).show();
+                latitude=Double.toString(latLng.latitude);
+                longitude=Double.toString(latLng.longitude);
             }
         });
     }
@@ -99,8 +102,12 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                     String cityName = addresses.get(0).getLocality();
                     String stateName = addresses.get(0).getAdminArea();
                     String countryName = addresses.get(0).getCountryName();
-
-                    strAdd = cityName+","+stateName+","+countryName;
+                    if(cityName== null){
+                        strAdd = stateName+","+countryName;
+                    }
+                    else {
+                        strAdd = cityName + "," + stateName + "," + countryName;
+                    }
                     Log.w("My Current location add", strAdd);
                 } else {
                     Log.w("My Current location add", "No Address returned!");
