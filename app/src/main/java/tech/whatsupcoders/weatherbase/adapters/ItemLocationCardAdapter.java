@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,8 +39,20 @@ public class ItemLocationCardAdapter extends RecyclerView.Adapter<ItemLocationCa
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemLocationCardAdapter.CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemLocationCardAdapter.CardViewHolder holder, final int position) {
         holder.tv_location.setText(getListLocations().get(position).getPlace());
+        holder.button_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeLocationItems(position);
+            }
+        });
+    }
+
+    private void removeLocationItems(int position) {
+        listLocations.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getListLocations().size());
     }
 
     @Override
@@ -49,9 +62,11 @@ public class ItemLocationCardAdapter extends RecyclerView.Adapter<ItemLocationCa
 
     public class CardViewHolder extends RecyclerView.ViewHolder{
         TextView tv_location;
+        ImageButton button_delete;
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_location=itemView.findViewById(R.id.location_name_card_textview);
+            button_delete=itemView.findViewById(R.id.delete_button);
         }
     }
 }

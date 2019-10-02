@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ArrayList<Location> list;
+    private ItemLocationCardAdapter cardAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +41,31 @@ public class MainActivity extends AppCompatActivity {
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent activity2Intent = new Intent(getApplicationContext(), LocationMapActivity.class);
-                startActivity(activity2Intent);
+                startActivityForResult(activity2Intent,1);
             }
         });
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                Location location=new Location();
+                String myFavLoc=data.getStringExtra("addressVal");
+                Toast.makeText(this, "Address"+myFavLoc, Toast.LENGTH_SHORT).show();
+                location.setPlace(myFavLoc);
+                list.add(location);
+                cardAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+
     private void showRecyclerViewList() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ItemLocationCardAdapter cardAdapter=new ItemLocationCardAdapter(this);
+        cardAdapter=new ItemLocationCardAdapter(this);
         cardAdapter.setListLocations(list);
         recyclerView.setAdapter(cardAdapter);
-
+        cardAdapter.notifyDataSetChanged();
     }
 }
