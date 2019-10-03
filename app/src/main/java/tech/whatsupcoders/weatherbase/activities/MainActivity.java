@@ -43,10 +43,20 @@ public class MainActivity extends AppCompatActivity {
         showRecyclerViewList();
 
         FloatingActionButton myFab = findViewById(R.id.location_map_button);
+        FloatingActionButton myHelp = findViewById(R.id.location_help_button);
+
+        myHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent helpIntent = new Intent(getApplicationContext(), ScrollingActivity.class);
+                helpIntent.putExtra("url", "https://openweathermap.org/");
+                startActivity(helpIntent);
+            }
+        });
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent activity2Intent = new Intent(getApplicationContext(), LocationMapActivity.class);
-                startActivityForResult(activity2Intent,1);
+                Intent locationIntent = new Intent(getApplicationContext(), LocationMapActivity.class);
+                startActivityForResult(locationIntent,1);
             }
         });
     }
