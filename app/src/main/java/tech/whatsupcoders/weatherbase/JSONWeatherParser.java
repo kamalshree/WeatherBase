@@ -4,8 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import tech.whatsupcoders.weatherbase.models.Weather;
 import tech.whatsupcoders.weatherbase.models.Location;
+import tech.whatsupcoders.weatherbase.models.Weather;
 
 public class JSONWeatherParser {
     public static Weather getWeather(String data) throws JSONException {
@@ -17,10 +17,6 @@ public class JSONWeatherParser {
         // We start extracting the info
         Location loc = new Location();
 
-        JSONObject coordObj = getObject("coord", jObj);
-        loc.setLatitude(getString("lat", coordObj));
-        loc.setLongitude(getString("lon", coordObj));
-
         JSONObject sysObj = getObject("sys", jObj);
         loc.setCountry(getString("country", sysObj));
         loc.setSunrise(getInt("sunrise", sysObj));
@@ -28,33 +24,28 @@ public class JSONWeatherParser {
         loc.setCity(getString("name", jObj));
         weather.location = loc;
 
+        weather.setName(jObj.getString("name"));
+        weather.setDt(jObj.getLong("dt"));
         // We get weather info (This is an array)
         JSONArray jArr = jObj.getJSONArray("weather");
 
-        // We use only the first value
+        // currentCondition
         JSONObject JSONWeather = jArr.getJSONObject(0);
-        weather.currentCondition.setWeatherId(getInt("id", JSONWeather));
         weather.currentCondition.setDescr(getString("description", JSONWeather));
-        weather.currentCondition.setCondition(getString("main", JSONWeather));
-        weather.currentCondition.setIcon(getString("icon", JSONWeather));
 
+        // Main
         JSONObject mainObj = getObject("main", jObj);
-        weather.currentCondition.setHumidity(getInt("humidity", mainObj));
-        weather.currentCondition.setPressure(getInt("pressure", mainObj));
-        weather.temperature.setMaxTemp(getFloat("temp_max", mainObj));
-        weather.temperature.setMinTemp(getFloat("temp_min", mainObj));
-        weather.temperature.setTemp(getFloat("temp", mainObj));
+        weather.main.setHumidity(getString("humidity", mainObj));
+        weather.main.setPressure(getString("pressure", mainObj));
+        weather.main.setTempMin(getString("temp_min", mainObj));
+        weather.main.setTempMax(getString("temp_max", mainObj));
+        weather.main.setTemp(getFloat("temp", mainObj));
+
 
         // Wind
         JSONObject wObj = getObject("wind", jObj);
-        weather.wind.setSpeed(getFloat("speed", wObj));
-        weather.wind.setDeg(getFloat("deg", wObj));
+        weather.wind.setSpeed(getString("speed", wObj));
 
-        // Clouds
-        JSONObject cObj = getObject("clouds", jObj);
-        weather.clouds.setPerc(getInt("all", cObj));
-
-        // We download the icon to show
 
 
         return weather;

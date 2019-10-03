@@ -19,8 +19,6 @@ public class WeatherHttpClient {
         try {
             con = (HttpURLConnection) ( new URL(BASE_URL + location+API_KEY)).openConnection();
             con.setRequestMethod("GET");
-            con.setDoInput(true);
-            con.setDoOutput(true);
             con.connect();
 
             // Let's read the response
@@ -34,38 +32,6 @@ public class WeatherHttpClient {
             is.close();
             con.disconnect();
             return buffer.toString();
-        }
-        catch(Throwable t) {
-            t.printStackTrace();
-        }
-        finally {
-            try { is.close(); } catch(Throwable t) {}
-            try { con.disconnect(); } catch(Throwable t) {}
-        }
-
-        return null;
-
-    }
-
-    public byte[] getImage(String code) {
-        HttpURLConnection con = null ;
-        InputStream is = null;
-        try {
-            con = (HttpURLConnection) ( new URL(IMG_URL + code)).openConnection();
-            con.setRequestMethod("GET");
-            con.setDoInput(true);
-            con.setDoOutput(true);
-            con.connect();
-
-            // Let's read the response
-            is = con.getInputStream();
-            byte[] buffer = new byte[1024];
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-            while ( is.read(buffer) != -1)
-                baos.write(buffer);
-
-            return baos.toByteArray();
         }
         catch(Throwable t) {
             t.printStackTrace();

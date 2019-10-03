@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
     tools:context=".activities.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -13,18 +14,39 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/location_help_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:clickable="true"
+        android:src="@drawable/ic_help_white_24dp"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/location_map_button"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/location_map_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="10dp"
         android:clickable="true"
+        android:src="@drawable/ic_add_location_black_24dp"
+        app:backgroundTint="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_map" />
+        app:layout_constraintHorizontal_bias="0.978"
+        app:layout_constraintStart_toEndOf="@+id/location_recyclerview"
+        app:layout_constraintTop_toBottomOf="@+id/location_recyclerview"
+        app:layout_constraintVertical_bias="0.966" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -73,13 +76,13 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Chicago and move the camera
-        LatLng myLocation = new LatLng(41.8781, -87.6298);
-        mMap.addMarker(new MarkerOptions().position(myLocation).title("Marker in Chicago"));
+        // Add a marker in Amsterdam and move the camera
+        LatLng myLocation = new LatLng(52.3667, 4.8945);
+        mMap.addMarker(new MarkerOptions().position(myLocation).title("Marker in Amsterdam").icon(getMarkerIcon("#17245B")));
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 4.0f ) );
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 6.0f ) );
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -91,6 +94,12 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                 longitude=Double.toString(latLng.longitude);
             }
         });
+    }
+
+    public BitmapDescriptor getMarkerIcon(String color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(Color.parseColor(color), hsv);
+        return BitmapDescriptorFactory.defaultMarker(hsv[0]);
     }
 
     private String getAddress(double latitude, double longitude) {
