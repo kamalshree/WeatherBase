@@ -6,9 +6,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import tech.whatsupcoders.weatherbase.BuildConfig;
+
 public class WeatherHttpClient {
+    static String api_key=BuildConfig.API_KEY;
     private static String BASE_URL = "http://api.openweathermap.org/data/2.5/weather?q=";
-    private static String API_KEY = "&appid=c6e381d8c7ff98f0fee43775817cf6ad&units=metric";
+    private static String API_KEY = "&appid="+api_key+"&units=metric";
 
 
     public String getWeatherData(String location) {

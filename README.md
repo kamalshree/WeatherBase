@@ -21,7 +21,7 @@ The WeatherBase App display weather based on selected position on the map with a
 
 ## APIs
 OpenWeatherMap API
-http://api.openweathermap.org/data/2.5/weather?lat=0&lon=0&appid=c6e381d8c7ff98f0fee4377 5817cf6ad&units=metric 
+http://api.openweathermap.org/data/2.5/weather?lat=0&lon=0&appid=API_KEY&units=metric
 
 ** Please update the API key as instructed below to see the Google Maps function correctly **
 **Update API Keys** 🔑
