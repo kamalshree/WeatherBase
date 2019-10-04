@@ -3,9 +3,7 @@ package tech.whatsupcoders.weatherbase.activities;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,12 +19,11 @@ public class ScrollingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
-        String url = getIntent().getStringExtra("url");
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab =  findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,13 +32,7 @@ public class ScrollingActivity extends AppCompatActivity {
             }
         });
 
-        final WebView webView = (WebView) findViewById(R.id.web_view);
-        webView.setWebViewClient(new WebViewClient() {
-
-        });
-        final WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-
+        final WebView webView =  findViewById(R.id.web_view);
         webView.setWebChromeClient(new WebChromeClient());
         webView.loadUrl("file:///android_asset/about_app.html");
     }

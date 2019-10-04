@@ -3,4 +3,25 @@
     <string name="title_activity_location_map">Map</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_scrolling">WeatherBase</string>
+    <string name="remove_location">Remove Location</string>
+    <string name="location_name">Chicago,IL,USA</string>
+    <string name="add_favorite_location">Add Favorite Location</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="forecast">Forecast</string>
+    <string name="clear_sky">Clear Sky</string>
+    <string name="def_temp">29°C</string>
+    <string name="min_temp">Min Temp: 05:05 AM</string>
+    <string name="max_temp">Max Temp: 05:05 PM</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="sunrise_time">06:40 AM</string>
+    <string name="sunset_time">06:40 AM</string>
+    <string name="wind">Wind</string>
+    <string name="wind_val">3.2</string>
+    <string name="pressure">Pressure</string>
+    <string name="pressure_val">900</string>
+    <string name="humidity">Humidity</string>
+    <string name="humidity_val">40</string>
+    <string name="weather">Weather</string>
+    <string name="current_time">20 April 2012, 20:08 PM</string>
 </resources>

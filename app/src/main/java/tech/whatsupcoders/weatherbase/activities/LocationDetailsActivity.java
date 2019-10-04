@@ -3,24 +3,21 @@ package tech.whatsupcoders.weatherbase.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
+
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import org.json.JSONException;
-import org.json.JSONObject;
+
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
+
 
 import tech.whatsupcoders.weatherbase.JSONWeatherParser;
 import tech.whatsupcoders.weatherbase.R;
@@ -28,18 +25,16 @@ import tech.whatsupcoders.weatherbase.models.Weather;
 import tech.whatsupcoders.weatherbase.models.WeatherHttpClient;
 
 public class LocationDetailsActivity extends AppCompatActivity {
-    String CITY = "dhaka,bd";
-    String API = "8118ed6ee68db2debfaaa5a44c832918";
-    String placeDetails;
-    TextView addressTxt, updated_atTxt, statusTxt, tempTxt, temp_minTxt, temp_maxTxt, sunriseTxt,
+    private String placeDetails;
+    private TextView addressTxt, updated_atTxt, statusTxt, tempTxt, temp_minTxt, temp_maxTxt, sunriseTxt,
             sunsetTxt, windTxt, pressureTxt, humidityTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_details);
-        Intent intent=getIntent();
-        placeDetails =intent.getStringExtra("placeDetails");
+        Intent intent = getIntent();
+        placeDetails = intent.getStringExtra("placeDetails");
         addressTxt = findViewById(R.id.address);
         updated_atTxt = findViewById(R.id.updated_at);
         statusTxt = findViewById(R.id.status);
@@ -71,6 +66,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
             return weather;
 
         }
+
         @Override
         protected void onPostExecute(Weather weather) {
             super.onPostExecute(weather);
@@ -92,7 +88,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
 
             String address = weather.getName();
 
-            try{
+            try {
                 addressTxt.setText(address);
                 updated_atTxt.setText(updatedAtText);
                 statusTxt.setText(weatherDescription.toUpperCase());
@@ -108,12 +104,12 @@ public class LocationDetailsActivity extends AppCompatActivity {
                 /* Views populated, Hiding the loader, Showing the main design */
                 findViewById(R.id.loader).setVisibility(View.GONE);
                 findViewById(R.id.mainContainer).setVisibility(View.VISIBLE);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 findViewById(R.id.loader).setVisibility(View.GONE);
                 findViewById(R.id.errorText).setVisibility(View.VISIBLE);
             }
         }
+
 
     }
 }

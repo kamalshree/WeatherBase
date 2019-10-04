@@ -1,9 +1,5 @@
 package tech.whatsupcoders.weatherbase.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
@@ -11,9 +7,9 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,13 +20,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import tech.whatsupcoders.weatherbase.R;
-import tech.whatsupcoders.weatherbase.adapters.ItemLocationCardAdapter;
-import tech.whatsupcoders.weatherbase.models.Location;
 
 public class LocationMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -43,10 +36,13 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_map);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         addButton=findViewById(R.id.add_button);
+
+        //Location add to favorites
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +54,9 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
                 finish();
             }
         });
-        mapFragment.getMapAsync(this);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
 
     }
 
@@ -96,12 +94,14 @@ public class LocationMapActivity extends FragmentActivity implements OnMapReadyC
         });
     }
 
+    //Custom Marker color
     public BitmapDescriptor getMarkerIcon(String color) {
         float[] hsv = new float[3];
         Color.colorToHSV(Color.parseColor(color), hsv);
         return BitmapDescriptorFactory.defaultMarker(hsv[0]);
     }
 
+    //Get address with latitude and longitude values
     private String getAddress(double latitude, double longitude) {
             String strAdd = "";
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
