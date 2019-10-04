@@ -18,12 +18,18 @@ public class LocationData {
         for (String mData : data) {
             location = new Location();
             location.setPlace(mData);
-            location.setLatitude(mData);
-            location.setLongitude(mData);
             list.add(location);
         }
 
         return list;
+    }
+
+    public static void setListData(String favPlace){
+        Location location;
+        location = new Location();
+        ArrayList<Location> list = new ArrayList<>();
+        location.setPlace(favPlace);
+        list.add(location);
     }
 
 }

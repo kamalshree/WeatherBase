@@ -44,6 +44,7 @@ public class ItemLocationCardAdapter extends RecyclerView.Adapter<ItemLocationCa
     @Override
     public void onBindViewHolder(@NonNull ItemLocationCardAdapter.CardViewHolder holder, final int position) {
         holder.tv_location.setText(getListLocations().get(position).getPlace());
+
         holder.cardView_Location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +61,7 @@ public class ItemLocationCardAdapter extends RecyclerView.Adapter<ItemLocationCa
                 removeLocationItems(position);
             }
         });
+
     }
 
     //remove favorite location item

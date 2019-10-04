@@ -26,7 +26,7 @@ public class Weather {
         this.name = name;
     }
 
-    public class Main{
+    public class Main {
         private String tempMin;
         private String tempMax;
         private String humidity;
@@ -73,6 +73,7 @@ public class Weather {
             this.temp = temp;
         }
     }
+
     public class CurrentCondition {
         private String descr;
 
@@ -106,7 +107,8 @@ public class Weather {
 
 
     }
-    public class Sys{
+
+    public class Sys {
         private int sunrise;
         private int sunset;
 

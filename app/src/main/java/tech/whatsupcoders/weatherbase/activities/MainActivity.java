@@ -2,6 +2,7 @@ package tech.whatsupcoders.weatherbase.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,9 +21,13 @@ import tech.whatsupcoders.weatherbase.models.LocationData;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ArrayList<Location> list;
+    private ArrayList<Location> list = new ArrayList<>();
     private ItemLocationCardAdapter cardAdapter;
     private String myFavLoc;
+    private final String KEY_RECYCLER_STATE = "recycler_state";
+    private static final String BUNDLE_RECYCLER_LAYOUT = "recycler_layout";
+    private Parcelable savedRecyclerLayoutState;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +37,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.location_recyclerview);
         recyclerView.setHasFixedSize(true);
 
-        list = new ArrayList<>();
-        list.addAll(LocationData.getListData());
-        showRecyclerViewList();
+
+        if (savedInstanceState != null) {
+            list = savedInstanceState.getParcelableArrayList(KEY_RECYCLER_STATE);
+            savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+            showRecyclerViewList();
+        } else {
+
+            list.addAll(LocationData.getListData());
+            showRecyclerViewList();
+
+        }
 
         FloatingActionButton myFab = findViewById(R.id.location_map_button);
         FloatingActionButton myHelp = findViewById(R.id.location_help_button);
@@ -80,4 +93,20 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(cardAdapter);
         cardAdapter.notifyDataSetChanged();
     }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putParcelableArrayList(KEY_RECYCLER_STATE, list);
+        savedInstanceState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        list = savedInstanceState.getParcelableArrayList(KEY_RECYCLER_STATE);
+        savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
 }
