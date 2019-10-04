@@ -23,9 +23,12 @@ The WeatherBase App display weather based on selected position on the map with a
 OpenWeatherMap API
 http://api.openweathermap.org/data/2.5/weather?lat=0&lon=0&appid=c6e381d8c7ff98f0fee4377 5817cf6ad&units=metric 
 
-** Please update the API key as instructed below to see the Google Maps function correctly **
+** Please update the API key as instructed **
 **Update API Keys** 🔑
- - Please create a API Key and udpate it in build.gradle(module:app) in buildTypes section.
+ You will need two API key one for openweathermap API and another is for google maps API.
+ 
+ - To update OpenWeatherMap API, create a API Key and udpate it in build.gradle(module:app) in buildTypes section.
+ - To update the google map API key , create a API Key and update key in the "google_maps_api.xml" which is in res-> vlaues->
  
 ## WeatherBas APP
 
